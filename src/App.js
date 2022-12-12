@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-import './App.css'
+import Background from './Background'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import * as THREE from 'three'
 import { useCallback, useEffect, useRef } from 'react'
@@ -111,13 +110,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <SceneContainer ref={containerRef} />
+      <Background />
     </div>
   )
 }
-
-const SceneContainer = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-`
