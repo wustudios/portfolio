@@ -120,7 +120,10 @@ export default function Background() {
 }
 
 const Container = styled.div`
+  z-index: -1;
   position: absolute;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
 `
