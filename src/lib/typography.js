@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-export const H1 = styled.h1`
-  color: ${({ theme }) => theme.colors.text.display};
-  font-family: 'IBM Plex Mono';
+export const Caption = styled.span`
+  font-size: 1rem;
+  line-height: 1.125rem;
+  color: ${({ theme }) => theme.colors.text.caption};
 `

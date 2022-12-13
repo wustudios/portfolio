@@ -3,8 +3,7 @@ export const colors = {
   error: '#ff4466',
   background: '#181818',
   text: {
-    body: '#d7d7d7',
-    display: '#ffffff',
+    caption: '#d7d7d7',
   },
 }
 
