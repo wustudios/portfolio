@@ -9,7 +9,9 @@ export default function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <Left>
-          <StyledLogo />
+          <Section>
+            <StyledLogo />
+          </Section>
           <p>
             A software development studio helping clients make the world a
             smaller, kinder place. We specialize in making complex software
@@ -36,16 +38,18 @@ export default function App() {
 }
 
 const StyledLogo = styled(Logo)`
-  width: 100%;
+  width: 400px;
 `
 
 const Left = styled.div`
   max-width: 580px;
   position: absolute;
-  top: 30%;
+  top: 0;
   left: 8%;
 `
 
 const Section = styled.div`
-  margin-top: 200px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
 `

@@ -14,7 +14,7 @@ html {
 body {
   font-family: 'IBM Plex Mono', 'arial', 'sans-serif';
   font-size: 1.625rem;
-  line-height: auto;
+  line-height: 2.125rem;
   letter-spacing: -1px;
   color: #D7D7D7;
 }
