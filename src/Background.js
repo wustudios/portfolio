@@ -68,7 +68,7 @@ export default function Background() {
         }
 
         child.material.metalness = 0.7
-        const scale = 2
+        const scale = 2.5
         child.scale.set(scale, scale, scale)
       })
 

@@ -8,18 +8,20 @@
 html {
   /* 1rem Size in px */
   font-size: 16px; 
+  background: #000000;
 }
 
 body {
-  color: #FFFFFF;
   font-family: 'IBM Plex Mono', 'arial', 'sans-serif';
   font-size: 1.625rem;
   line-height: auto;
   letter-spacing: -1px;
+  color: #D7D7D7;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
+  color: #FFFFFF;
 }
 
 
@@ -31,6 +33,7 @@ h1 {
 h2 {
   font-size: 4rem;
   line-height: 4.75rem;
+  margin-bottom: 1rem;
 }
 
 h3 {
