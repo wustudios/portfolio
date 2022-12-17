@@ -11,19 +11,23 @@ import gsap from 'gsap'
  */
 const EXPAND_SCROLL_THRESHOLD = 150
 
+const GROW_ANIMATION_DURATION_SECS = 1.8
+
 export default function Background() {
   const containerRef = useRef()
   const rendererRef = useRef()
   const cameraRef = useRef()
-  const objRef = useRef()
+  const [planet, setPlanet] = useState(null)
+
   const rotationSpeedRef = useRef(1)
 
   const [expanded, setExpanded] = useState(false)
 
   const scrollPosition = useScrollPosition()
 
+  // Set planet expand state depending on scroll amount
   useEffect(() => {
-    if (!objRef.current) {
+    if (!planet) {
       return
     }
 
@@ -37,8 +41,9 @@ export default function Background() {
       setExpanded(false)
       return
     }
-  }, [scrollPosition, expanded])
+  }, [scrollPosition, expanded, planet])
 
+  // Load 3D model of planet
   useEffect(() => {
     const { current: container } = containerRef
     if (!container) {
@@ -67,13 +72,15 @@ export default function Background() {
 
     camera.lookAt(-25, 0, 0)
 
+    let model = null
+
     // Animate function called for every frame
     const animate = () => {
       window.requestAnimationFrame(animate)
 
       // Spin planet
-      if (objRef.current) {
-        objRef.current.rotation.y -= rotationSpeedRef.current * 0.001
+      if (model) {
+        model.rotation.y -= rotationSpeedRef.current * 0.001
       }
 
       renderer.render(scene, camera)
@@ -83,9 +90,10 @@ export default function Background() {
 
     // Load our planet 3d model
     loader.load(publicUrl('/planet-1.gltf'), (gltf) => {
-      objRef.current = gltf.scene
+      model = gltf.scene
+      setPlanet(model)
 
-      objRef.current.traverse(function (child) {
+      model.traverse(function (child) {
         if (!child.isMesh) {
           return
         }
@@ -100,7 +108,7 @@ export default function Background() {
         child.scale.set(scale, scale, scale)
       })
 
-      scene.add(objRef.current)
+      scene.add(model)
 
       // Kick off render, and animation...
       animate()
@@ -145,14 +153,14 @@ export default function Background() {
 
   // Handle expanded state to scale planet
   useEffect(() => {
-    if (!objRef.current) {
+    if (!planet) {
       return
     }
 
     const scale = expanded ? 10 : 1
 
-    gsap.to(objRef.current.scale, {
-      duration: 1.8,
+    gsap.to(planet.scale, {
+      duration: GROW_ANIMATION_DURATION_SECS,
       x: scale,
       y: scale,
       z: scale,
@@ -161,29 +169,35 @@ export default function Background() {
 
     // Adjust rotation speed according to zoom
     gsap.to(rotationSpeedRef, {
-      duration: 1.8,
-      current: expanded ? 0.1 : 1,
+      duration: GROW_ANIMATION_DURATION_SECS,
+      current: expanded ? 0.1 : 1, // Slow down animation to 1/10th when zoomed
       ease: 'none', // Linear
     })
-  }, [expanded])
+  }, [expanded, planet])
 
   return <Container ref={containerRef} />
 }
 
 function useScrollPosition() {
   const [position, setPosition] = useState(0)
-  const handleScroll = () => {
+  const calculate = useCallback(() => {
     const position = window.pageYOffset
     setPosition(position)
-  }
+  }, [])
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', calculate, {
+      // Set 'passive' to true for faster scroll handling.
+      // reference: https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
+      passive: true,
+    })
+    window.addEventListener('load', calculate)
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', calculate)
+      window.removeEventListener('load', calculate)
     }
-  }, [])
+  }, [calculate])
 
   return position
 }
