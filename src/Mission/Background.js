@@ -2,46 +2,18 @@ import styled from 'styled-components'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import * as THREE from 'three'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { publicUrl } from './lib/url'
+import { publicUrl } from '../lib/url'
 import gsap from 'gsap'
-
-/**
- * How much scroll is required before we expand the globe
- * to be full screen.
- */
-const EXPAND_SCROLL_THRESHOLD = 150
 
 const GROW_ANIMATION_DURATION_SECS = 1.8
 
-export default function Background() {
+export default function Background({ expanded }) {
   const containerRef = useRef()
   const rendererRef = useRef()
   const cameraRef = useRef()
   const [planet, setPlanet] = useState(null)
 
   const rotationSpeedRef = useRef(1)
-
-  const [expanded, setExpanded] = useState(false)
-
-  const scrollPosition = useScrollPosition()
-
-  // Set planet expand state depending on scroll amount
-  useEffect(() => {
-    if (!planet) {
-      return
-    }
-
-    const shouldExpand = scrollPosition > EXPAND_SCROLL_THRESHOLD
-    if (shouldExpand && !expanded) {
-      setExpanded(true)
-      return
-    }
-
-    if (!shouldExpand && expanded) {
-      setExpanded(false)
-      return
-    }
-  }, [scrollPosition, expanded, planet])
 
   // Load 3D model of planet
   useEffect(() => {
@@ -176,30 +148,6 @@ export default function Background() {
   }, [expanded, planet])
 
   return <Container ref={containerRef} />
-}
-
-function useScrollPosition() {
-  const [position, setPosition] = useState(0)
-  const calculate = useCallback(() => {
-    const position = window.pageYOffset
-    setPosition(position)
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener('scroll', calculate, {
-      // Set 'passive' to true for faster scroll handling.
-      // reference: https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
-      passive: true,
-    })
-    window.addEventListener('load', calculate)
-
-    return () => {
-      window.removeEventListener('scroll', calculate)
-      window.removeEventListener('load', calculate)
-    }
-  }, [calculate])
-
-  return position
 }
 
 const Container = styled.div`
