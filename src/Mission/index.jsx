@@ -1,7 +1,7 @@
 import Background from './Background'
 import styled from 'styled-components'
-import { ReactComponent as Logo } from '../assets/logo-horizontal.svg'
 import { useCallback, useEffect, useState } from 'react'
+import Logo from '../lib/Logo'
 
 /**
  * How much scroll is required before we expand the globe
@@ -30,7 +30,7 @@ export default function Mission() {
   return (
     <>
       <Background expanded={expanded} />
-      <StyledLogo compact={expanded} />
+      <Logo compact={expanded} />
       <Left>
         <TopSpacer />
         <p>
@@ -84,21 +84,6 @@ function useScrollPosition() {
 
   return position
 }
-
-const StyledLogo = styled(Logo)`
-  position: fixed;
-  top: ${(props) => (props.compact ? '32px' : '50%')};
-  width: ${(props) => (props.compact ? '150px' : '400px')};
-  left: ${(props) => (props.compact ? '32px' : '15%')};
-
-   {
-    /* Apply a transform of -50% to account for logo height, and have it actually be centered vertically. */
-  }
-  transform: ${(props) =>
-    props.compact ? 'translate(0,0)' : 'translate(0, -50%)'};
-
-  transition: all 275ms ease-in;
-`
 
 const Left = styled.div`
   max-width: 580px;

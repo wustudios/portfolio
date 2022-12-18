@@ -1,4 +1,8 @@
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from '@mui/material/styles'
 
 export const colors = {
   brand: '#bdff00',
@@ -6,10 +10,55 @@ export const colors = {
   background: '#181818',
 }
 
+const muiTheme = createTheme({
+  typography: {
+    fontFamily: ['IBM Plex Mono', 'arial', 'sans-serif'].join(','),
+  },
+  palette: {
+    primary: {
+      main: colors.brand,
+    },
+    text: {
+      primary: '#FFFFFF',
+    },
+    error: {
+      main: colors.error,
+    },
+  },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.125rem',
+          lineHeight: '1.375rem',
+          backgroundColor: 'rgba(58, 58, 58, 0.48)',
+          borderRadius: '32px',
+          '&:not(.Mui-error):hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: colors.brand,
+          },
+          '&.Mui-focused': {
+            color: colors.brand,
+          },
+        },
+        input: {
+          padding: '14px 20px 16px',
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {},
+    },
+  },
+})
+
 export const theme = {
   colors,
 }
 
 export function ThemeProvider({ children }) {
-  return <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+  return (
+    <StyledThemeProvider theme={theme}>
+      <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
+    </StyledThemeProvider>
+  )
 }
