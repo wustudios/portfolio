@@ -1,7 +1,9 @@
 import Background from './Background'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useCallback, useEffect, useState } from 'react'
 import Logo from '../lib/Logo'
+import Button from '../lib/Button'
 
 /**
  * How much scroll is required before we expand the globe
@@ -33,11 +35,13 @@ export default function Mission() {
       <Logo compact={expanded} />
       <Left>
         <TopSpacer />
-        <p>
-          A software development studio helping clients make the world a
-          smaller, kinder place. We specialize in making complex software
-          amazingly simple.
-        </p>
+        <Section>
+          <p>
+            A software development studio helping clients make the world a
+            smaller, kinder place. We specialize in making complex software
+            amazingly simple.
+          </p>
+        </Section>
         <Section>
           <p>
             It all starts with your idea. We then begin to discover the
@@ -51,10 +55,15 @@ export default function Mission() {
             agnostic. That said, these are some of our favorite tools:
           </p>
         </Section>
-        <Section>
+        <Section half>
           <p>
             Have an idea in mind? Send us a message. We'd love to hear from you.
           </p>
+          <StyledLink to="contact">
+            <Button size="large" fullWidth>
+              Get in touch
+            </Button>
+          </StyledLink>
         </Section>
       </Left>
     </>
@@ -93,11 +102,18 @@ const Left = styled.div`
 `
 
 const Section = styled.div`
-  height: 100vh;
+  height: ${(props) => (props.half ? '50vh' : '100vh')};
+  ${(props) => (props.half ? 'transform: translate(0, -25%)' : '')};
   display: flex;
   align-items: center;
+  flex-direction: column;
 `
 
 const TopSpacer = styled.div`
   height: 125vh;
+`
+
+const StyledLink = styled(Link)`
+  width: 100%;
+  text-decoration: none;
 `

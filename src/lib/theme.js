@@ -45,8 +45,17 @@ const muiTheme = createTheme({
         },
       },
     },
-    MuiTextField: {
-      styleOverrides: {},
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          '&.MuiButton-containedSizeLarge': {
+            padding: '16px 32px',
+            fontSize: '1.125rem',
+            borderRadius: '100px',
+          },
+        },
+      },
     },
   },
 })
