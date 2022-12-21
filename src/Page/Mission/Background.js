@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import * as THREE from 'three'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { publicUrl } from '../lib/url'
+import { publicUrl } from '../../lib/url'
 import gsap from 'gsap'
 
 const GROW_ANIMATION_DURATION_SECS = 1.8

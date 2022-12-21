@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Mission from './Mission'
-import ContactForm from './ContactForm'
+import Mission from './Page/Mission'
+import ContactForm from './Page/ContactForm'
 
 const router = createBrowserRouter([
   {

@@ -2,8 +2,9 @@ import Background from './Background'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useCallback, useEffect, useState } from 'react'
-import Logo from '../lib/Logo'
-import Button from '../lib/Button'
+import Logo from '../../lib/Logo'
+import Button from '../../lib/Button'
+import Page from '../'
 
 /**
  * How much scroll is required before we expand the globe
@@ -30,9 +31,9 @@ export default function Mission() {
   }, [scrollPosition, expanded])
 
   return (
-    <>
-      <Background expanded={expanded} />
+    <Page>
       <Logo compact={expanded} />
+      <Background expanded={expanded} />
       <Left>
         <TopSpacer />
         <Section>
@@ -66,7 +67,7 @@ export default function Mission() {
           </StyledLink>
         </Section>
       </Left>
-    </>
+    </Page>
   )
 }
 

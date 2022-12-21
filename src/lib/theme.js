@@ -8,6 +8,9 @@ export const colors = {
   brand: '#bdff00',
   error: '#ff4466',
   background: '#181818',
+  text: {
+    primary: '#D7D7D7',
+  },
 }
 
 const muiTheme = createTheme({
@@ -53,6 +56,9 @@ const muiTheme = createTheme({
             padding: '16px 32px',
             fontSize: '1.125rem',
             borderRadius: '100px',
+          },
+          '&.MuiButton-textPrimary': {
+            color: colors.text.primary,
           },
         },
       },
