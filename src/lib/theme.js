@@ -42,6 +42,9 @@ const muiTheme = createTheme({
           '&.Mui-focused': {
             color: colors.brand,
           },
+          '.MuiInputBase-inputMultiline': {
+            padding: '0px 6px 16px',
+          },
         },
         input: {
           padding: '14px 20px 16px',
@@ -59,6 +62,9 @@ const muiTheme = createTheme({
           },
           '&.MuiButton-textPrimary': {
             color: colors.text.primary,
+          },
+          '&.MuiButton-text:hover': {
+            backgroundColor: 'transparent', // Disable background box on hover
           },
         },
       },

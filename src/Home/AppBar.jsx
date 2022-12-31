@@ -1,24 +1,28 @@
 import Button from '../lib/Button'
 import styled from 'styled-components'
-import { Link, useLocation } from 'react-router-dom'
 
 export default function AppBar() {
   return (
     <Box>
-      <PageLink route="/">Mission</PageLink>
-      <PageLink route="/work">Work</PageLink>
-      <PageLink route="/contact">Contact</PageLink>
+      <PageLink section="#mission">Mission</PageLink>
+      <PageLink section="/work">Work</PageLink>
+      <PageLink section="#contact">Contact</PageLink>
     </Box>
   )
 }
 
-function PageLink({ route, children }) {
-  let { pathname } = useLocation()
+function PageLink({ section, children }) {
+  const isActive = false
 
-  const isActive = pathname === route
+  const scrollToAnchor = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    document.querySelector(section).scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
 
   return (
-    <StyledLink to={route}>
+    <StyledLink href={section} onClick={scrollToAnchor}>
       <StyledButton variant="text" highlight={isActive}>
         {children}
       </StyledButton>
@@ -39,7 +43,7 @@ const StyledButton = styled(({ highlight, ...otherProps }) => (
   }
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   text-decoration: none !important;
 `
 

@@ -1,10 +1,10 @@
-import Routes from './Routes'
+import Home from './Home'
 import { ThemeProvider } from './lib/theme'
 
 export default function App() {
   return (
     <ThemeProvider>
-      <Routes />
+      <Home />
     </ThemeProvider>
   )
 }
