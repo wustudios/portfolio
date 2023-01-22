@@ -11,6 +11,17 @@ export const colors = {
   text: {
     primary: '#D7D7D7',
   },
+  overlay: 'rgba(58, 58, 58, 0.48)',
+  accordion: {
+    border: '#5C5A5A',
+  },
+}
+
+export const breakpoints = {
+  sm: '600px',
+  md: '960px',
+  lg: '1280px',
+  xl: '1920px',
 }
 
 const muiTheme = createTheme({
@@ -51,6 +62,17 @@ const muiTheme = createTheme({
         },
       },
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff',
+          fontSize: '1.625rem',
+          textTransform: 'none',
+          fontWeight: 300,
+          borderBottom: `2px solid ${colors.overlay}`,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -65,6 +87,20 @@ const muiTheme = createTheme({
           },
           '&.MuiButton-text:hover': {
             backgroundColor: 'transparent', // Disable background box on hover
+          },
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'transparent',
+          boxShadow: 'none',
+          borderRadius: '0!important',
+          borderTop: `1px solid ${colors.accordion.border}`,
+
+          '&:last-child': {
+            borderBottom: `1px solid ${colors.accordion.border}`,
           },
         },
       },

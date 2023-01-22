@@ -1,28 +1,30 @@
 import Button from '../lib/Button'
 import styled from 'styled-components'
+import { CONTACT, MISSION, useSection, WORK } from '.'
 
 export default function AppBar() {
   return (
     <Box>
-      <PageLink section="#mission">Mission</PageLink>
-      <PageLink section="/work">Work</PageLink>
-      <PageLink section="#contact">Contact</PageLink>
+      <PageLink section={MISSION}>Mission</PageLink>
+      <PageLink section={WORK}>Work</PageLink>
+      <PageLink section={CONTACT}>Contact</PageLink>
     </Box>
   )
 }
 
 function PageLink({ section, children }) {
-  const isActive = false
+  const { section: active } = useSection()
+  const isActive = section === active
 
   const scrollToAnchor = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    document.querySelector(section).scrollIntoView({
+    document.querySelector(`#${section}`).scrollIntoView({
       behavior: 'smooth',
     })
   }
 
   return (
-    <StyledLink href={section} onClick={scrollToAnchor}>
+    <StyledLink href={`#${section}`} onClick={scrollToAnchor}>
       <StyledButton variant="text" highlight={isActive}>
         {children}
       </StyledButton>

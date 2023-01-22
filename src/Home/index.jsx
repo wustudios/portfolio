@@ -1,10 +1,22 @@
 import AppBar from './AppBar'
+import React from 'react'
 import styled from 'styled-components'
 import Logo from '../lib/Logo'
 import Background from './Background'
 import { useCallback, useEffect, useState } from 'react'
 import Mission from './Mission'
+import Content from './Content'
+import Work from './Work'
 import ContactForm from './ContactForm'
+
+/**
+ * Sections a user can click to navigate to.
+ */
+export const MISSION = 'mission'
+export const WORK = 'work'
+export const CONTACT = 'contact'
+
+const SectionContext = React.createContext()
 
 /**
  * How much scroll is required before we expand the globe
@@ -15,18 +27,32 @@ const EXPAND_SCROLL_THRESHOLD = 150
 export default function Home() {
   const expandedBackground = useExpandedBackground()
 
+  const [section, setSection] = useState('mission')
+
   return (
-    <>
+    <SectionContext.Provider value={{ section, setSection }}>
       <AppBar />
       <Logo compact={expandedBackground} />
       <Background expanded={expandedBackground} />
-      <Left>
+      <Content>
         <TopSpacer />
         <Mission />
+      </Content>
+      <Work />
+      <Content>
         <ContactForm />
-      </Left>
-    </>
+      </Content>
+    </SectionContext.Provider>
   )
+}
+
+export function useSection() {
+  const context = React.useContext(SectionContext)
+  if (context === undefined) {
+    throw new Error(`useSection must be used within a SectionProvider`)
+  }
+
+  return context
 }
 
 /**
@@ -79,11 +105,4 @@ function useScrollPosition() {
 
 const TopSpacer = styled.div`
   height: 60vh;
-`
-
-const Left = styled.div`
-  max-width: 580px;
-  position: absolute;
-  top: 0;
-  left: 15%;
 `
