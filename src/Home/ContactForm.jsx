@@ -35,10 +35,7 @@ export default function ContactForm() {
               variant="outlined"
               placeholder="Your Name"
               fullWidth
-              name="name"
-              inputProps={{
-                ref: register,
-              }}
+              {...register('name')}
             />
           </Box>
           <Box mb={1}>
@@ -46,10 +43,7 @@ export default function ContactForm() {
               variant="outlined"
               placeholder="Your Email"
               fullWidth
-              name="email"
-              inputProps={{
-                ref: register,
-              }}
+              {...register('email')}
             />
           </Box>
           <Box mb={1}>
@@ -59,10 +53,7 @@ export default function ContactForm() {
               fullWidth
               rows={5}
               placeholder="Your Message"
-              name="message"
-              inputProps={{
-                ref: register,
-              }}
+              {...register('message')}
             />
           </Box>
           <Button size="large" fullWidth type="submit">
