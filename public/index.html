@@ -36,7 +36,11 @@
       can't see any JS rendered forms at build time.
       Reference: https://docs.netlify.com/forms/setup/#work-with-javascript-rendered-forms
     -->
-    <form data-netlify="true" name="contact" />
+    <form data-netlify="true" name="contact" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message" />
+    </form>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
