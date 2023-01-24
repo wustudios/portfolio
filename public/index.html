@@ -30,6 +30,13 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- 
+      Contact Us Form for Netlify 
+      Creating an empty form is required as a workaround, as Netlify's parser
+      can't see any JS rendered forms at build time.
+      Reference: https://docs.netlify.com/forms/setup/#work-with-javascript-rendered-forms
+    -->
+    <form data-netlify="true" name="contact" />
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
