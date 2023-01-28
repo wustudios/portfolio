@@ -139,7 +139,7 @@ function Content() {
             >
               <SubmissionError>
                 Server error.
-                <br /> Please try again, or send me an email directly at
+                <br /> Please try again, or reach me via email at
                 {` `}
                 <a href="mailto:mike@wu.studio">mike@wu.studio</a>
               </SubmissionError>
