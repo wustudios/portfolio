@@ -7,8 +7,10 @@
 
 html {
   background: #000000;
+}
 
-  
+:root {
+  --color-brand: #bdff00;
 }
 
 body {
@@ -52,4 +54,5 @@ button {
 a {
   cursor: pointer;
   font-size: 1.375rem;
+  color: var(--color-brand);
 }
