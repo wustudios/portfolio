@@ -21,7 +21,11 @@ export default function ContactForm() {
 }
 
 function Content() {
-  const { register, handleSubmit } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
   const containerRef = useRef()
   const [submissionFailed, setSubmissionFailed] = useState(false)
   const [messageSent, setMessageSent] = useState(false)
@@ -98,7 +102,9 @@ function Content() {
             variant="outlined"
             placeholder="Your Name"
             fullWidth
-            {...register('name')}
+            {...register('name', { required: 'Name is required' })}
+            error={Boolean(errors.name)}
+            helperText={errors.name ? errors.name.message : ''}
           />
         </Box>
         <Box mb={1}>
@@ -106,7 +112,11 @@ function Content() {
             variant="outlined"
             placeholder="Your Email"
             fullWidth
-            {...register('email')}
+            {...register('email', {
+              required: 'email is required',
+            })}
+            error={Boolean(errors.email)}
+            helperText={errors.email ? errors.email.message : ''}
           />
         </Box>
         <Box mb={1}>
@@ -116,7 +126,11 @@ function Content() {
             fullWidth
             rows={5}
             placeholder="Your Message"
-            {...register('message')}
+            {...register('message', {
+              required: 'Message is required',
+            })}
+            error={Boolean(errors.message)}
+            helperText={errors.message ? errors.message.message : ''}
           />
         </Box>
         <Button size="large" fullWidth type="submit">
